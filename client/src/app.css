@@ -4,3 +4,8 @@
 @import "@skeletonlabs/skeleton";
 @import "@skeletonlabs/skeleton-svelte";
 @import "@skeletonlabs/skeleton/themes/sahara";
+
+html,
+body {
+    @apply h-full;
+}
