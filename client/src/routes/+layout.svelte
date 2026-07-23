@@ -11,7 +11,7 @@
 
 	import { page } from "$app/state";
 	let path = $derived(decodeURIComponent(page.url.pathname));
-	let isPublic = $derived(path === "/kirjaudu" || path === "/rekisteröidy");
+	let isPublic = $derived(path === "/rekisteröidy");
 </script>
 
 <div class="flex flex-col h-full">
@@ -21,12 +21,16 @@
 				class="w-8 h-8 border-4 border-surface-300-600 border-t-primary-500 rounded-full animate-spin"
 			></div>
 		</div>
-	{:else if userState?.email || isPublic}
+	{:else if userState?.email}
 		<Header />
 		<main class="p-4 grow">
 			{@render children()}
 		</main>
 		<Footer />
+	{:else if isPublic}
+		<main class="p-4 grow">
+			{@render children()}
+		</main>
 	{:else}
 		<Login />
 	{/if}

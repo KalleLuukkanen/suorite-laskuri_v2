@@ -19,6 +19,16 @@ const getUserFromSession = () => {
     });
 };
 
+const logout = async () => {
+    await authClient.signOut();
+    window.location.href = "/kirjaudu"
+}
+
+const deleteAccount = async () => {
+    await authClient.deleteUser();
+    window.location.href = "/kirjaudu";
+}
+
 const useUserState = () => {
     if (!browser) {
         return;
@@ -32,11 +42,7 @@ const useUserState = () => {
         get email() {
             return userState?.email;
         },
-        logout: async () => {
-            await authClient.signOut();
-            window.location.href = "/kirjaudu";
-        },
     };
 };
 
-export { useUserState };
+export { useUserState, logout, deleteAccount };
