@@ -1,7 +1,7 @@
 import { authClient } from "../utils/auth.js";
 import { browser } from "$app/environment";
 
-let userState = $state({ loading: true });
+let userState = $state({ loading: true, email: null });
 let userStatePromise = null;
 
 const getUserFromSession = () => {
@@ -14,7 +14,7 @@ const getUserFromSession = () => {
         if (session?.data?.user?.email) {
             userState = session?.data?.user;
         } else {
-            userState = { email: null };
+            userState = { email: null, loading: false };
         }
     });
 };
@@ -31,7 +31,7 @@ const deleteAccount = async () => {
 
 const useUserState = () => {
     if (!browser) {
-        return;
+        return { loading: true, email: null };
     } else if (!userState?.email) {
         getUserFromSession();
     }
