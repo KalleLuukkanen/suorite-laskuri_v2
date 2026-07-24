@@ -5,7 +5,6 @@ import postgres from "postgres";
 const dialect = new PostgresJSDialect({
     postgres: postgres(),
 });
-
 export const auth = betterAuth({
 
     baseURL: Deno.env.get("BETTER_AUTH_URL"),
@@ -24,3 +23,9 @@ export const auth = betterAuth({
         },
     },
 });
+
+const sql = postgres();
+export const getUserId = async (user_name) => {
+    const result = await sql`SELECT * FROM app_user WHERE name = ${user_name};`;
+    return result[0];
+};

@@ -1,5 +1,5 @@
 <script>
-    import Authentication from "./Authentication.svelte";
+    import Authentication from "./Authentification.svelte";
 </script>
 
 <div class="flex flex-col mt-6">

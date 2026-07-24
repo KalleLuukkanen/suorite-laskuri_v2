@@ -1,6 +1,7 @@
 import { Hono } from "@hono/hono";
 import { cors } from "@hono/hono/cors";
 import { auth } from "./auth.js";
+import * as sectionsController from "./controllers/sectionsController.js";
 
 const app = new Hono();
 
@@ -10,6 +11,7 @@ app.use("/*", cors({
 }));
 //auth
 app.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
+
 app.use("*", async (c, next) => {
     const session = await auth.api.getSession({ headers: c.req.raw.headers });
     if (!session) {
@@ -19,6 +21,7 @@ app.use("*", async (c, next) => {
     c.set("user", session.user.name);
     return next();
 });
+
 app.use("/api/*", async (c, next) => {
     const user = c.get("user");
     if (!user) {
@@ -27,5 +30,15 @@ app.use("/api/*", async (c, next) => {
     }
     return next();
 });
+
+
+//sections
+app.get("/api/sections", sectionsController.getAllSections);
+app.get("/api/sections/:sectionId", sectionsController.getOneSection);
+app.post("/api/sections", sectionsController.addSection);
+app.delete("/api/sections/:sectionId", sectionsController.deleteSection);
+app.patch("/api/sections/:sectionId", sectionsController.modifySection);
+
+//performances
 
 export default app;
