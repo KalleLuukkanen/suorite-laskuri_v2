@@ -9,7 +9,7 @@
     };
 </script>
 
-<form onsubmit={handleForm}>
+<form class="flex flex-col space-y-4" onsubmit={handleForm}>
     <label>
         Lisää uusi työosasto:
         <input
@@ -18,6 +18,7 @@
             type="text"
             class="input"
             placeholder="Esim. hevi"
+            required
         />
     </label>
     <label>
@@ -29,7 +30,8 @@
             step="1"
             class="input"
             placeholder="Esim. 150"
+            required
         />
     </label>
-    <input type="submit" value="Lisää" />
+    <button class="btn bg-primary-300" type="submit">Lisää</button>
 </form>

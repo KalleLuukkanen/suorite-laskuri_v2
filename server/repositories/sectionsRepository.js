@@ -18,10 +18,10 @@ const getOneSection = async (id, user_id) => {
     return result[0];
 };
 
-const addSection = async (section, user_id, goal) => {
+const addSection = async (name, user_id, goal) => {
     const result = await sql`
-    INSERT INTO sections (section, user_id, goal)
-    VALUES (${section}, ${user_id}, ${goal})
+    INSERT INTO sections (name, user_id, goal)
+    VALUES (${name}, ${user_id}, ${goal})
     RETURNING*;`;
     return result[0];
 };
@@ -35,10 +35,10 @@ const deleteSection = async (id, user_id) => {
     return result[0];
 };
 
-const modifySection = async (id, user_id, new_section, new_goal) => {
+const modifySection = async (id, user_id, new_name, new_goal) => {
     const result = await sql`
     UPDATE sections
-    SET section = ${new_section}, goal = ${new_goal}
+    SET name = ${new_name}, goal = ${new_goal}
     WHERE user_id = ${user_id} AND id = ${id}
     RETURNING *;`;
     return result[0];

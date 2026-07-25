@@ -1,9 +1,13 @@
 <script>
-    import Sections from "./Sections.svelte";
+    import Sections from "../sections/Sections.svelte";
     import { deleteAccount } from "$lib/states/userState.svelte.js";
 </script>
 
-<div>
+<div class="space-y-6">
     <Sections />
-    <button class="btn bg-red-300" onclick={deleteAccount}>Poista tili</button>
+    <div class="fex flex-col space-y-4">
+        <p class="text-2xl font-bold">Asetukset:</p>
+        <button class="btn border-1" onclick={deleteAccount}>Poista tili</button
+        >
+    </div>
 </div>
