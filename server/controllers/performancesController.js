@@ -1,5 +1,5 @@
 import * as performancesRepository from "../repositories/performancesRepository.js";
-import { getUserId } from "../auth:js";
+import { getUserId } from "../auth.js";
 
 const getAllPerformances = async (c) => {
     const username = c.get("user");

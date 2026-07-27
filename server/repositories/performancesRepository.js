@@ -34,7 +34,7 @@ const addPerformance = async (user_id, worksection, workdate, hours_spent, perfo
     return result[0];
 };
 
-const deletePerformance = async = (id, user_id) => {
+const deletePerformance = async (id, user_id) => {
     const result = await sql`
     DELETE
     FROM performances

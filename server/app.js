@@ -11,7 +11,7 @@ app.use("/*", cors({
     credentials: true,
 }));
 //auth
-app.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
+app.on(["POST", "GET"], "/api/auth/*", (c) => { return auth.handler(c.req.raw) });
 
 app.use("*", async (c, next) => {
     const session = await auth.api.getSession({ headers: c.req.raw.headers });
@@ -41,6 +41,7 @@ app.delete("/api/sections/:sectionId", sectionsController.deleteSection);
 app.patch("/api/sections/:sectionId", sectionsController.modifySection);
 
 //performances
+
 app.get("/api/performances", performancesController.getAllPerformances);
 app.get("/api/performances/phase", performancesController.getAllPerformancesOfPhase);
 app.get("/api/performances/:performanceId", performancesController.getOnePerformance);
