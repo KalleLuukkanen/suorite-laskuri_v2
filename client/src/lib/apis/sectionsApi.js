@@ -30,9 +30,6 @@ const deleteSection = async (section_id) => {
     const response = await fetch(`${PUBLIC_API_URL}/api/sections/${section_id}`, {
         credentials: "include",
         method: "DELETE",
-        headers: {
-            "Content-type": "application/json",
-        },
     });
     return await response.json();
 };

@@ -2,6 +2,7 @@ import { Hono } from "@hono/hono";
 import { cors } from "@hono/hono/cors";
 import { auth } from "./auth.js";
 import * as sectionsController from "./controllers/sectionsController.js";
+import * as performancesController from "./controllers/performancesController.js";
 
 const app = new Hono();
 
@@ -40,5 +41,11 @@ app.delete("/api/sections/:sectionId", sectionsController.deleteSection);
 app.patch("/api/sections/:sectionId", sectionsController.modifySection);
 
 //performances
+app.get("/api/performances", performancesController.getAllPerformances);
+app.get("/api/performances/phase", performancesController.getAllPerformancesOfPhase);
+app.get("/api/performances/:performanceId", performancesController.getOnePerformance);
+app.post("/api/performances", performancesController.addPerformance);
+app.delete("/api/performances/:performanceId", performancesController.deletePerformance);
+app.patch("/api/performances/:performanceId", performancesController.modifyPerformance);
 
 export default app;
