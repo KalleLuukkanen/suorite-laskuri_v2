@@ -1,6 +1,6 @@
 <script>
     const { name, goal, id } = $props();
-    import { modifySection, deleteSection } from "$lib/apis/sectionsApi.js";
+    import { useSectionState } from "$lib/states/sectionState.svelte.js";
     import SectionForm from "./SectionForm.svelte";
 
     let modifying = $state(false);
@@ -8,16 +8,13 @@
         modifying = !modifying;
     };
 
-    const deleteSec = async () => {
-        await deleteSection(id);
-        window.location.reload();
-    };
+    let sectionState = useSectionState();
 
     const handleForm = async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target));
-        await modifySection(id, data);
-        window.location.reload();
+        sectionState.modify(id, data);
+        toggleModify();
     };
 </script>
 
@@ -32,7 +29,9 @@
             <p>{goal}</p>
         </div>
         <div>
-            <button class="btn bg-red-300" onclick={deleteSec}>Poista</button>
+            <button class="btn bg-red-300" onclick={sectionState.remove(id)}
+                >Poista</button
+            >
             <button class="btn bg-green-300" onclick={toggleModify}
                 >Muokkaa</button
             >
