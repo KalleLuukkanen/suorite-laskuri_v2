@@ -1,11 +1,13 @@
 <script>
-    import { addSection } from "$lib/apis/sectionsApi.js";
+    import { useSectionState } from "$lib/states/sectionState.svelte.js";
+
+    let sectionState = useSectionState();
 
     const handleForm = async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target));
-        await addSection(data);
-        window.location.reload();
+        sectionState.create(data);
+        e.target.reset();
     };
 </script>
 

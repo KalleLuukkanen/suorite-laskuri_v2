@@ -43,6 +43,7 @@ app.patch("/api/sections/:sectionId", sectionsController.modifySection);
 //performances
 
 app.get("/api/performances", performancesController.getAllPerformances);
+app.get("/api/performances/phases", performancesController.getPhases);
 app.get("/api/performances/phase", performancesController.getAllPerformancesOfPhase);
 app.get("/api/performances/:performanceId", performancesController.getOnePerformance);
 app.post("/api/performances", performancesController.addPerformance);

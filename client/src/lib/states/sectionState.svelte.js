@@ -1,6 +1,6 @@
 import * as sectionsApi from "../apis/sectionsApi.js";
 
-let sectionState = $state([]);
+let sectionState = $state(null);
 
 export const initSections = async () => {
     const sections = await sectionsApi.getAllSections();

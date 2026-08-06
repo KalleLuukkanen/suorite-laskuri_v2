@@ -18,6 +18,36 @@ const getAllPerformancesOfPhase = async (user_id, phase_start, phase_end) => {
     return result;
 };
 
+//get phases which contain a performance
+const getPhases = async (user_id) => {
+    const result = await sql`
+    SELECT DISTINCT
+        CASE
+            WHEN EXTRACT(DAY FROM workdate) <= 15
+            THEN DATE_TRUNC('month', workdate)::date
+            ELSE (DATE_TRUNC('month', workdate) + INTERVAL '15 days')::date
+        END AS phase_start,
+
+        CASE
+            WHEN EXTRACT(DAY FROM workdate) <= 15
+            THEN (DATE_TRUNC('month', workdate) + INTERVAL '14 days')::date
+            ELSE (DATE_TRUNC('month', workdate) + INTERVAL '1 month - 1 day')::date
+        END AS phase_end,
+
+        EXTRACT(YEAR FROM workdate) AS y,
+        EXTRACT(MONTH FROM workdate) AS m,
+
+        CASE
+            WHEN EXTRACT(DAY FROM workdate) <= 15 THEN 1
+            ELSE 2
+        END AS p
+    FROM performances
+    WHERE user_id = ${user_id}
+    ORDER BY y DESC, m DESC, p DESC;
+    `;
+    return result;
+};
+
 const getOnePerformance = async (user_id, id) => {
     const result = await sql`
     SELECT *
@@ -52,4 +82,4 @@ const modifyPerformance = async (id, user_id, new_worksection, new_workdate, new
     return result[0];
 };
 
-export { getAllPerformances, getAllPerformancesOfPhase, getOnePerformance, addPerformance, deletePerformance, modifyPerformance };
+export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getOnePerformance, addPerformance, deletePerformance, modifyPerformance };
