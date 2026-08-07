@@ -12,6 +12,26 @@ export const usePerformanceState = () => {
         get performances() {
             return performanceState;
         },
+        get phases() {
+            if (performanceState === null) return null;
+
+            const phases = new Map();
+
+            for (const p of performanceState) {
+                const d = new Date(p.workdate);
+
+                const start = d.getDate() <= 15 ? new Date(d.getFullYear(), d.getMonth(), 1) : new Date(d.getFullYear(), d.getMonth(), 16);
+                const end = d.getDate() <= 15 ? new Date(d.getFullYear(), d.getMonth(), 15) : new Date(d.getFullYear(), d.getMonth() + 1, 0);
+
+                phases.set(start.toISOString(), {
+                    phase_start: start,
+                    phase_end: end,
+                });
+            }
+            return [...phases.values()].sort(
+                (a, b) => b.phase_start - a.phase_start
+            );
+        },
         performancesOfPhase: (date) => {
             const d = new Date(date);
             let first_day = null;

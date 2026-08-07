@@ -15,7 +15,7 @@
     };
 
     $effect(async () => {
-        phases = await getPhases();
+        phases = performanceState?.phases ?? [];
     });
 </script>
 
@@ -26,14 +26,19 @@
         Klikkaa <a href="/tili" class="anchor">tästä</a> lisätäksesi työosastoja,
         jotta voit aloittaa laskurin käytön.
     </p>
-{:else if performanceState.performances.length === 0}
-    {#if !showingForm}
-        <button class="btn border-1" onclick={toggle}
-            >Lisää tästä uusi suoritus ➕</button
-        >
-    {:else}
-        <PerformanceForm {toggle} />
-    {/if}
+{:else if phases.length === 0}
+    <p>Loading phases...</p>
 {:else}
-    <p>test</p>
+    <PerformanceForm />
+    <Phase
+        phase_start={phases[0].phase_start}
+        phase_end={phases[0].phase_end}
+        showing="true"
+    />
+    {#if 1 in phases}
+        <Phase
+            phase_start={phases[1].phase_start}
+            phase_end={phases[1].phase_end}
+        />
+    {/if}
 {/if}
