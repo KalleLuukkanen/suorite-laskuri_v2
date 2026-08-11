@@ -12,6 +12,15 @@
 	import { page } from "$app/state";
 	let path = $derived(decodeURIComponent(page.url.pathname));
 	let isPublic = $derived(path === "/rekisteröidy");
+
+	import { initPerformances } from "$lib/states/performanceState.svelte.js";
+	import { initSections } from "$lib/states/sectionState.svelte.js";
+	$effect(() => {
+		if (userState?.email) {
+			initPerformances();
+			initSections();
+		}
+	});
 </script>
 
 <div class="flex flex-col h-full">

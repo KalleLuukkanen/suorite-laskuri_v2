@@ -36,7 +36,7 @@ export const usePerformanceState = () => {
             const d = new Date(date);
             let first_day = null;
             let last_day = null;
-            if (d.getDay() <= 15) {
+            if (d.getDate() <= 15) {
                 first_day = new Date(d.getFullYear(), d.getMonth(), 1);
                 last_day = new Date(d.getFullYear(), d.getMonth(), 15);
             } else {
@@ -64,6 +64,13 @@ export const usePerformanceState = () => {
         modify: async (id, performance) => {
             const modified_performance = await performancesApi.modifyPerformance(id, performance);
             performanceState = performanceState.map((p) => p.id === id ? modified_performance : p);
+        },
+        getOne: (id) => {
+            if (performanceState === null) return null;
+
+            return performanceState.find(
+                (p) => p.id === Number(id)
+            );
         },
     }
 };

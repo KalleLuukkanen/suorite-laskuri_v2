@@ -35,6 +35,21 @@
             <button type="button" class="ml-auto" onclick={toggle}>❌</button>
         </div>
         <label>
+            Työpäivä:
+            <span
+                class="cursor-help"
+                title="Jos olet yövuorossa, laita päivämäärä, jona työvuoro loppuu."
+                >ⓘ</span
+            >
+            <input
+                class="input"
+                type="date"
+                id="workdate"
+                name="workdate"
+                required
+            />
+        </label>
+        <label>
             Työosasto:
             <select
                 bind:value={selectedSection}
@@ -49,16 +64,6 @@
                     </option>
                 {/each}
             </select>
-        </label>
-        <label>
-            Työpäivä:
-            <input
-                class="input"
-                type="date"
-                id="workdate"
-                name="workdate"
-                required
-            />
         </label>
         <label class="flex items-center gap-2">
             <span>Käytetty aika:</span>
