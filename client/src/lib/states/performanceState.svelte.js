@@ -57,8 +57,8 @@ export const usePerformanceState = () => {
                 );
             });
         },
-        performancesOfSection: (section_id) => {
-            return performanceState.filter((p) => p.worksection === section_id);
+        performancesOfSection: (performances, section_id) => {
+            return performances.filter((p) => Number(p.worksection) === Number(section_id));
         },
         perfOfSectionAndPhase: (section_id, date) => {
             return performanceState

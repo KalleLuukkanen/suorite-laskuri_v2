@@ -24,3 +24,18 @@ export const calcEfficiency = (performances) => {
     const efficiency = total_p_hours / (total_spent_hours * (7.25 / 8));
     return efficiency * 100;
 };
+
+export const hours_needed = (performances, eff_goal) => {
+    const performance_hours = get_performance_hours(performances);
+    const spent_hours = get_spent_hours(performances);
+    if (performance_hours.length !== spent_hours.length) {
+        throw new Error("Arrays must have same length.");
+    }
+    const total_p_hours = sum(performance_hours);
+    const total_spent_hours = sum(spent_hours);
+    return (eff_goal / 100) * ((total_spent_hours + 8) * (7.250 / 8)) - total_p_hours;
+};
+
+export const effInHours = (eff) => {
+    return (Number(eff) / 100) * 7.25;
+};

@@ -1,6 +1,7 @@
 <script>
     import { usePerformanceState } from "$lib/states/performanceState.svelte.js";
     import Performance from "../performances/Performance.svelte";
+    import PerformanceForm from "../performances/PerformanceForm.svelte";
     import StatsOfPhase from "./StatsOfPhase.svelte";
     let { phase_start, phase_end, showing = false } = $props();
 
@@ -32,6 +33,7 @@
                     <li><Performance id={performance.id} /></li>
                 {/each}
             {/if}
+            <li><PerformanceForm /></li>
         </ul>
     {/if}
 </div>

@@ -5,7 +5,8 @@
     let performanceState = usePerformanceState();
     let sectionState = useSectionState();
 
-    let showingForm = $state(false);
+    let { showing = false } = $props();
+    let showingForm = $state(showing);
     const toggle = () => {
         showingForm = !showingForm;
     };
