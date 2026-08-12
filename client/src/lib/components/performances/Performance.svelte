@@ -69,6 +69,10 @@
             <p>{performance.performance_hours}</p>
         </div>
         <div class="ml-auto">
+            <button
+                class="btn bg-red-300"
+                onclick={() => performanceState.remove(id)}>Poista</button
+            >
             <button class="btn bg-primary-300" onclick={toggleModify}
                 >Muokkaa</button
             >
@@ -76,7 +80,7 @@
     </div>
 {:else}
     <form
-        class="card flex flex-col space-y-4 border-2 border-surface-100 p-4 max-w-sm"
+        class="card flex flex-col space-y-4 border-2 border-surface-100 p-4 max-w-80"
         onsubmit={handleForm}
     >
         <div class="flex">
@@ -118,32 +122,33 @@
             </select>
         </label>
 
-        <label class="flex items-center gap-2">
+        <label class="flex flex-col items-center gap-2">
             <span>Käytetty aika:</span>
+            <div class="flex space-x-2">
+                <input
+                    class="w-16 input"
+                    type="number"
+                    name="hours"
+                    min="0"
+                    max="16"
+                    step="1"
+                    required
+                    value={hours_and_mins().hours}
+                />
+                <span>h</span>
 
-            <input
-                class="w-16 input"
-                type="number"
-                name="hours"
-                min="0"
-                max="16"
-                step="1"
-                required
-                value={hours_and_mins().hours}
-            />
-            <span>h</span>
-
-            <input
-                class="w-16 input"
-                type="number"
-                name="minutes"
-                min="0"
-                max="59"
-                step="1"
-                required
-                value={hours_and_mins().mins}
-            />
-            <span>min</span>
+                <input
+                    class="w-16 input"
+                    type="number"
+                    name="minutes"
+                    min="0"
+                    max="59"
+                    step="1"
+                    required
+                    value={hours_and_mins().mins}
+                />
+                <span>min</span>
+            </div>
         </label>
         <label>
             Tehot (tunteina):

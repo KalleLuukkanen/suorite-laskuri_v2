@@ -34,8 +34,10 @@ export const usePerformanceState = () => {
         },
         performancesOfPhase: (date) => {
             const d = new Date(date);
-            let first_day = null;
-            let last_day = null;
+
+            let first_day;
+            let last_day;
+
             if (d.getDate() <= 15) {
                 first_day = new Date(d.getFullYear(), d.getMonth(), 1);
                 last_day = new Date(d.getFullYear(), d.getMonth(), 15);
@@ -43,11 +45,25 @@ export const usePerformanceState = () => {
                 first_day = new Date(d.getFullYear(), d.getMonth(), 16);
                 last_day = new Date(d.getFullYear(), d.getMonth() + 1, 0);
             }
-            return performanceState.filter((p) =>
-                new Date(p.workdate) >= first_day && new Date(p.workdate) <= last_day);
+
+            return performanceState.filter((p) => {
+                const workdate = new Date(p.workdate);
+
+                return (
+                    workdate.getFullYear() === first_day.getFullYear() &&
+                    workdate.getMonth() === first_day.getMonth() &&
+                    workdate.getDate() >= first_day.getDate() &&
+                    workdate.getDate() <= last_day.getDate()
+                );
+            });
         },
-        performancesOfSection: (section_name) => {
-            return performanceState.filter((p) => p.worksection === section_name);
+        performancesOfSection: (section_id) => {
+            return performanceState.filter((p) => p.worksection === section_id);
+        },
+        perfOfSectionAndPhase: (section_id, date) => {
+            return performanceState
+                .performancesOfPhase(date)
+                .filter((p) => p.worksection === section_id);
         },
         create: async (performance) => {
             const created_performance = await performancesApi.addPerformance(performance);

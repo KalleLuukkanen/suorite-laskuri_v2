@@ -5,13 +5,10 @@
     import { usePerformanceState } from "$lib/states/performanceState.svelte.js";
 
     let performanceState = usePerformanceState();
-    let phases = $state([]);
-    $effect(async () => {
-        phases = performanceState?.phases;
-    });
+    let phases = $derived(performanceState.phases);
 </script>
 
-<ul>
+<ul class="flex flex-col space-y-4">
     {#each phases as phase}
         <li>
             <Phase

@@ -13,18 +13,33 @@
 	let path = $derived(decodeURIComponent(page.url.pathname));
 	let isPublic = $derived(path === "/rekisteröidy");
 
-	import { initPerformances } from "$lib/states/performanceState.svelte.js";
-	import { initSections } from "$lib/states/sectionState.svelte.js";
+	import {
+		initPerformances,
+		usePerformanceState,
+	} from "$lib/states/performanceState.svelte.js";
+	import {
+		initSections,
+		useSectionState,
+	} from "$lib/states/sectionState.svelte.js";
 	$effect(() => {
 		if (userState?.email) {
 			initPerformances();
 			initSections();
 		}
 	});
+
+	let sectionState = useSectionState();
+	let performanceState = usePerformanceState();
+	let loading = $derived(
+		userState?.loading ||
+			(userState?.email &&
+				(sectionState.sections === null ||
+					performanceState.performances === null)),
+	);
 </script>
 
 <div class="flex flex-col h-full">
-	{#if !userState || userState?.loading}
+	{#if !userState || loading}
 		<div class="flex items-center justify-center h-full">
 			<div
 				class="w-8 h-8 border-4 border-surface-300-600 border-t-primary-500 rounded-full animate-spin"

@@ -7,27 +7,19 @@
 
     let sectionState = useSectionState();
     let performanceState = usePerformanceState();
-    let phases = $state([]);
+    let phases = $derived(performanceState.phases);
 
     let showingForm = $state(false);
     const toggle = () => {
         showingForm = !showingForm;
     };
-
-    $effect(async () => {
-        phases = performanceState?.phases ?? [];
-    });
 </script>
 
-{#if sectionState.sections === null}
-    <p>Loading...</p>
-{:else if sectionState.sections.length === 0}
+{#if sectionState.sections.length === 0}
     <p>
         Klikkaa <a href="/tili" class="anchor">tästä</a> lisätäksesi työosastoja,
         jotta voit aloittaa laskurin käytön.
     </p>
-{:else if phases.length === 0}
-    <p>Loading phases...</p>
 {:else}
     <PerformanceForm />
     <Phase

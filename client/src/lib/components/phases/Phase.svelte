@@ -1,6 +1,7 @@
 <script>
     import { usePerformanceState } from "$lib/states/performanceState.svelte.js";
     import Performance from "../performances/Performance.svelte";
+    import StatsOfPhase from "./StatsOfPhase.svelte";
     let { phase_start, phase_end, showing = false } = $props();
 
     const toggleShowing = () => {
@@ -17,14 +18,15 @@
     });
 </script>
 
-<div>
-    <button class="btn text-2xl font-bold" onclick={toggleShowing}>
+<div class="flex flex-col space-y-4">
+    <button class="btn text-3xl font-bold" onclick={toggleShowing}>
         {phase_start_date.toLocaleDateString(
             "fi-FI",
         )}-{phase_end_date.toLocaleDateString("fi-FI")}
     </button>
     {#if showing}
-        <ul>
+        <StatsOfPhase {performances} />
+        <ul class="grid grid-cols-5" gap-1>
             {#if performances.length > 0}
                 {#each performances as performance}
                     <li><Performance id={performance.id} /></li>

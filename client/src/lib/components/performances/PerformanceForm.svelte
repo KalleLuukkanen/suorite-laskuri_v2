@@ -106,7 +106,9 @@
         <button class="btn bg-primary-300" type="submit">Lisää</button>
     </form>
 {:else}
-    <button class="btn border-1" onclick={toggle}
-        >Lisää tästä uusi suoritus ➕</button
-    >
+    <div class="flex">
+        <button class="btn border-1 ml-auto" onclick={toggle}
+            >Lisää tästä uusi suoritus ➕</button
+        >
+    </div>
 {/if}
