@@ -25,7 +25,14 @@ const getPhases = async (c) => {
     const user_id = (await getUserId(username)).id;
     const phases = await performancesRepository.getPhases(user_id);
     return c.json(phases, 200);
-}
+};
+
+const getEfficiencyByPhaseAndSection = async (c) => {
+    const username = c.get("user");
+    const user_id = (await getUserId(username)).id;
+    const efficiencies = await performancesRepository.getEfficiencyByPhaseAndSection(user_id);
+    return c.json(efficiencies, 200);
+};
 
 const getOnePerformance = async (c) => {
     const username = c.get("user");
@@ -87,4 +94,4 @@ const modifyPerformance = async (c) => {
     return c.json(performance, 200);
 };
 
-export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getOnePerformance, addPerformance, deletePerformance, modifyPerformance };
+export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getEfficiencyByPhaseAndSection, getOnePerformance, addPerformance, deletePerformance, modifyPerformance };

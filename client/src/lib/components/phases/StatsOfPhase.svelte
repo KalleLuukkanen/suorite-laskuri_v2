@@ -38,6 +38,11 @@
                         ),
                         section.goal,
                     ) - effInHours(section.goal)} ylimääräistä aikaa.
+                    <span
+                        class="cursor-help"
+                        title="Oletuksella, että teet kokonaisen työpäivän tällä osastolla."
+                        >ⓘ</span
+                    >
                 </p>
             {:else if Number(efficiency(section.id)) > section.goal}
                 <p>
@@ -49,6 +54,11 @@
                             ),
                             section.goal,
                         )} ylimääräistä aikaa.
+                    <span
+                        class="cursor-help"
+                        title="Oletuksella, että teet kokonaisen työpäivän tällä osastolla."
+                        >ⓘ</span
+                    >
                 </p>
             {/if}
         </li>

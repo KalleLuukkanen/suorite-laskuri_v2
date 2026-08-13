@@ -12,6 +12,10 @@ export const useSectionState = () => {
         get sections() {
             return sectionState;
         },
+        getOne: (section_id) => {
+            if (sectionState === null) return null;
+            return sectionState.find((s) => Number(s.id) === Number(section_id));
+        },
         create: async (section) => {
             const new_section = await sectionsApi.addSection(section);
             sectionState.push(new_section);

@@ -48,6 +48,37 @@ const getPhases = async (user_id) => {
     return result;
 };
 
+const getEfficiencyByPhaseAndSection = async (user_id) => {
+    const result = await sql`
+        SELECT
+            worksection,
+
+            CASE
+                WHEN EXTRACT(DAY FROM workdate) <= 15
+                THEN DATE_TRUNC('month', workdate)::date
+                ELSE (DATE_TRUNC('month', workdate) + INTERVAL '15 days')::date
+            END AS phase_start,
+
+            CASE
+                WHEN EXTRACT(DAY FROM workdate) <= 15
+                THEN (DATE_TRUNC('month', workdate) + INTERVAL '14 days')::date
+                ELSE (DATE_TRUNC('month', workdate) + INTERVAL '1 month - 1 day')::date
+            END AS phase_end,
+
+            SUM(performance_hours)
+                / (SUM(hours_spent) * (7.25 / 8))
+                * 100 AS efficiency
+
+        FROM performances
+        WHERE user_id = ${user_id}
+
+        GROUP BY worksection, phase_start, phase_end
+        ORDER BY phase_start DESC;
+    `;
+
+    return result;
+};
+
 const getOnePerformance = async (user_id, id) => {
     const result = await sql`
     SELECT *
@@ -82,4 +113,4 @@ const modifyPerformance = async (id, user_id, new_worksection, new_workdate, new
     return result[0];
 };
 
-export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getOnePerformance, addPerformance, deletePerformance, modifyPerformance };
+export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getEfficiencyByPhaseAndSection, getOnePerformance, addPerformance, deletePerformance, modifyPerformance };

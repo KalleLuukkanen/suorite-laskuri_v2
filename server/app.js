@@ -45,9 +45,11 @@ app.patch("/api/sections/:sectionId", sectionsController.modifySection);
 app.get("/api/performances", performancesController.getAllPerformances);
 app.get("/api/performances/phases", performancesController.getPhases);
 app.get("/api/performances/phase", performancesController.getAllPerformancesOfPhase);
+app.get("/api/performances/efficiencies", performancesController.getEfficiencyByPhaseAndSection);
 app.get("/api/performances/:performanceId", performancesController.getOnePerformance);
 app.post("/api/performances", performancesController.addPerformance);
 app.delete("/api/performances/:performanceId", performancesController.deletePerformance);
 app.patch("/api/performances/:performanceId", performancesController.modifyPerformance);
+
 
 export default app;
