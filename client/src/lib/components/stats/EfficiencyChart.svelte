@@ -109,7 +109,7 @@
 {#if efficiencies === null}
     <Loading />
 {:else}
-    <div class="w-full h-80">
+    <div class="w-full h-full">
         <canvas bind:this={canvas}></canvas>
     </div>
 {/if}

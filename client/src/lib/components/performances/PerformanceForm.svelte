@@ -47,6 +47,7 @@
                 type="date"
                 id="workdate"
                 name="workdate"
+                value={new Date().toISOString().split("T")[0]}
                 required
             />
         </label>
