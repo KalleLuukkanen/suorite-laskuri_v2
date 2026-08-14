@@ -77,6 +77,10 @@ export const usePerformanceState = () => {
             const removed_performance = await performancesApi.deletePerformance(id);
             performanceState = performanceState.filter((p) => p.id !== id);
         },
+        removeAll: async () => {
+            await performancesApi.deleteAllPerformances();
+            performanceState = [];
+        },
         modify: async (id, performance) => {
             const modified_performance = await performancesApi.modifyPerformance(id, performance);
             performanceState = performanceState.map((p) => p.id === id ? modified_performance : p);

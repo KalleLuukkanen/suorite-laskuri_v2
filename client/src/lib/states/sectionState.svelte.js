@@ -24,6 +24,10 @@ export const useSectionState = () => {
             const removed_section = await sectionsApi.deleteSection(id);
             sectionState = sectionState.filter((s) => s.id !== id);
         },
+        removeAll: async () => {
+            await sectionsApi.deleteAllSections();
+            sectionState = [];
+        },
         modify: async (id, section) => {
             const modified_section = await sectionsApi.modifySection(id, section);
             sectionState = sectionState.map((s) => s.id === id ? modified_section : s);

@@ -104,6 +104,15 @@ const deletePerformance = async (id, user_id) => {
     return result[0];
 };
 
+const deleteAllPerformances = async (user_id) => {
+    const result = await sql`
+    DELETE
+    FROM performances
+    WHERE user_id = ${user_id}
+    RETURNING *;`;
+    return result;
+};
+
 const modifyPerformance = async (id, user_id, new_worksection, new_workdate, new_hours_spent, new_performance_hours) => {
     const result = await sql`
     UPDATE performances
@@ -113,4 +122,4 @@ const modifyPerformance = async (id, user_id, new_worksection, new_workdate, new
     return result[0];
 };
 
-export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getEfficiencyByPhaseAndSection, getOnePerformance, addPerformance, deletePerformance, modifyPerformance };
+export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getEfficiencyByPhaseAndSection, getOnePerformance, addPerformance, deletePerformance, deleteAllPerformances, modifyPerformance };

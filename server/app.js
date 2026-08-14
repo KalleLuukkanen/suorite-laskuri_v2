@@ -37,6 +37,7 @@ app.use("/api/*", async (c, next) => {
 app.get("/api/sections", sectionsController.getAllSections);
 app.get("/api/sections/:sectionId", sectionsController.getOneSection);
 app.post("/api/sections", sectionsController.addSection);
+app.delete("/api/sections", sectionsController.deleteAllSections);
 app.delete("/api/sections/:sectionId", sectionsController.deleteSection);
 app.patch("/api/sections/:sectionId", sectionsController.modifySection);
 
@@ -48,6 +49,7 @@ app.get("/api/performances/phase", performancesController.getAllPerformancesOfPh
 app.get("/api/performances/efficiencies", performancesController.getEfficiencyByPhaseAndSection);
 app.get("/api/performances/:performanceId", performancesController.getOnePerformance);
 app.post("/api/performances", performancesController.addPerformance);
+app.delete("/api/performances", performancesController.deleteAllPerformances);
 app.delete("/api/performances/:performanceId", performancesController.deletePerformance);
 app.patch("/api/performances/:performanceId", performancesController.modifyPerformance);
 

@@ -35,6 +35,15 @@ const deleteSection = async (id, user_id) => {
     return result[0];
 };
 
+const deleteAllSections = async (user_id) => {
+    const result = await sql`
+    DELETE
+    FROM sections
+    WHERE user_id = ${user_id}
+    RETURNING *;`;
+    return result;
+}
+
 const modifySection = async (id, user_id, new_name, new_goal) => {
     const result = await sql`
     UPDATE sections
@@ -44,4 +53,4 @@ const modifySection = async (id, user_id, new_name, new_goal) => {
     return result[0];
 };
 
-export { getAllSections, getOneSection, addSection, deleteSection, modifySection };
+export { getAllSections, getOneSection, addSection, deleteSection, deleteAllSections, modifySection };

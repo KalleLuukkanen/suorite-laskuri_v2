@@ -49,6 +49,14 @@ const deletePerformance = async (performance_id) => {
     return await response.json();
 };
 
+const deleteAllPerformances = async () => {
+    const response = await fetch(`${PUBLIC_API_URL}/api/performances`, {
+        credentials: "include",
+        method: "DELETE",
+    });
+    return await response.json();
+};
+
 const modifyPerformance = async (performance_id, performance) => {
     const response = await fetch(`${PUBLIC_API_URL}/api/performances/${performance_id}`, {
         credentials: "include",
@@ -68,4 +76,4 @@ const getEfficiencyByPhaseAndSection = async () => {
     return await response.json();
 };
 
-export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getOnePerformance, addPerformance, deletePerformance, modifyPerformance, getEfficiencyByPhaseAndSection };
+export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getOnePerformance, addPerformance, deletePerformance, deleteAllPerformances, modifyPerformance, getEfficiencyByPhaseAndSection };

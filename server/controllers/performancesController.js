@@ -76,6 +76,13 @@ const deletePerformance = async (c) => {
     return c.json(performance, 200);
 };
 
+const deleteAllPerformances = async (c) => {
+    const username = c.get("user");
+    const user_id = (await getUserId(username)).id;
+    const performances = await performancesRepository.deleteAllPerformances(user_id);
+    return c.json(performances, 200);
+};
+
 const modifyPerformance = async (c) => {
     const username = c.get("user");
     const user_id = (await getUserId(username)).id;
@@ -94,4 +101,4 @@ const modifyPerformance = async (c) => {
     return c.json(performance, 200);
 };
 
-export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getEfficiencyByPhaseAndSection, getOnePerformance, addPerformance, deletePerformance, modifyPerformance };
+export { getAllPerformances, getAllPerformancesOfPhase, getPhases, getEfficiencyByPhaseAndSection, getOnePerformance, addPerformance, deletePerformance, deleteAllPerformances, modifyPerformance };

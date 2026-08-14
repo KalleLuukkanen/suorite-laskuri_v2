@@ -34,6 +34,14 @@ const deleteSection = async (section_id) => {
     return await response.json();
 };
 
+const deleteAllSections = async () => {
+    const response = await fetch(`${PUBLIC_API_URL}/api/sections`, {
+        credentials: "include",
+        method: "DELETE",
+    });
+    return await response.json();
+};
+
 const modifySection = async (section_id, section) => {
     const response = await fetch(`${PUBLIC_API_URL}/api/sections/${section_id}`, {
         credentials: "include",
@@ -46,4 +54,4 @@ const modifySection = async (section_id, section) => {
     return await response.json();
 };
 
-export { getAllSections, getOneSection, addSection, deleteSection, modifySection };
+export { getAllSections, getOneSection, addSection, deleteSection, deleteAllSections, modifySection };

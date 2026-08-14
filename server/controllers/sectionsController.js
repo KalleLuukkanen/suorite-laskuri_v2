@@ -53,6 +53,13 @@ const deleteSection = async (c) => {
     return c.json(deleted_section, 200);
 };
 
+const deleteAllSections = async (c) => {
+    const username = c.get("user");
+    const user_id = (await getUserId(username)).id;
+    const deleted_sections = await sectionsRepository.deleteAllSections(user_id);
+    return c.json(deleted_sections, 200);
+};
+
 const modifySection = async (c) => {
     const username = c.get("user");
     const user_id = (await getUserId(username)).id;
@@ -74,4 +81,4 @@ const modifySection = async (c) => {
     return c.json(modified_section, 200);
 };
 
-export { getAllSections, getOneSection, addSection, deleteSection, modifySection };
+export { getAllSections, getOneSection, addSection, deleteSection, deleteAllSections, modifySection };
