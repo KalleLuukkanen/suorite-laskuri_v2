@@ -23,11 +23,13 @@
 {:else}
     <PerformanceForm />
     <div class="flex flex-col space-y-4">
-        <Phase
-            phase_start={phases[0].phase_start}
-            phase_end={phases[0].phase_end}
-            showing="true"
-        />
+        {#if 0 in phases}
+            <Phase
+                phase_start={phases[0].phase_start}
+                phase_end={phases[0].phase_end}
+                showing="true"
+            />
+        {/if}
         {#if 1 in phases}
             <Phase
                 phase_start={phases[1].phase_start}
