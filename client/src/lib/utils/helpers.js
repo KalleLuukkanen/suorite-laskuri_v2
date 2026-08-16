@@ -39,3 +39,10 @@ export const hours_needed = (performances, eff_goal) => {
 export const effInHours = (eff) => {
     return (Number(eff) / 100) * 7.25;
 };
+
+export const phaseFromDate = (date) => {
+    const d = new Date(date);
+    const phase_start = d.getDate() <= 15 ? new Date(d.getFullYear(), d.getMonth(), 1) : new Date(d.getFullYear(), d.getMonth(), 16);
+    const phase_end = d.getDate() <= 15 ? new Date(d.getFullYear(), d.getMonth(), 15) : new Date(d.getFullYear(), d.getMonth() + 1, 0);
+    return { phase_start, phase_end };
+}
