@@ -19,7 +19,7 @@
     });
 </script>
 
-<div class="flex flex-col space-y-4">
+<div class="space-y-4">
     <button class="btn text-3xl font-bold" onclick={toggleShowing}>
         {phase_start_date.toLocaleDateString(
             "fi-FI",

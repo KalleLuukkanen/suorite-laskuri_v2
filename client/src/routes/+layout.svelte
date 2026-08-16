@@ -2,10 +2,10 @@
 	import "../app.css";
 	let { children } = $props();
 
-	import Header from "../lib/components/Header.svelte";
-	import Footer from "../lib/components/Footer.svelte";
+	import Header from "../lib/components/layout/Header.svelte";
+	import Footer from "../lib/components/layout/Footer.svelte";
 	import Login from "$lib/components/auth/Login.svelte";
-	import Loading from "$lib/components/Loading.svelte";
+	import Loading from "$lib/components/layout/Loading.svelte";
 
 	import { useUserState } from "$lib/states/userState.svelte.js";
 	let userState = useUserState();

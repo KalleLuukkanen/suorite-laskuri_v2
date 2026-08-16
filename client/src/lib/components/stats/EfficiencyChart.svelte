@@ -1,7 +1,7 @@
 <script>
     import { getEfficiencyByPhaseAndSection } from "$lib/apis/performancesApi.js";
     import { useSectionState } from "$lib/states/sectionState.svelte.js";
-    import Loading from "../Loading.svelte";
+    import Loading from "../layout/Loading.svelte";
     import {
         Chart,
         BarController,
