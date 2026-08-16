@@ -31,13 +31,15 @@
                 <p>- Tavoitteessa, jatka samaan malliin.</p>
             {:else if Number(efficiency(section.id)) < section.goal && Number(efficiency(section.id)) > 0}
                 <p>
-                    - Alle tavoitteen, sinun täytyy kerätä {hours_needed(
-                        performanceState.performancesOfSection(
-                            performances,
-                            section.id,
-                        ),
-                        section.goal,
-                    ) - effInHours(section.goal)} ylimääräistä aikaa.
+                    - Alle tavoitteen, sinun täytyy kerätä {(
+                        hours_needed(
+                            performanceState.performancesOfSection(
+                                performances,
+                                section.id,
+                            ),
+                            section.goal,
+                        ) - effInHours(section.goal)
+                    ).toFixed(3)} ylimääräistä aikaa.
                     <span
                         class="cursor-help"
                         title="Oletuksella, että teet kokonaisen työpäivän tällä osastolla."
@@ -46,14 +48,16 @@
                 </p>
             {:else if Number(efficiency(section.id)) > section.goal}
                 <p>
-                    - Yli tavoitteen, sinulla on {effInHours(section.goal) -
+                    - Yli tavoitteen, sinulla on {(
+                        effInHours(section.goal) -
                         hours_needed(
                             performanceState.performancesOfSection(
                                 performances,
                                 section.id,
                             ),
                             section.goal,
-                        )} ylimääräistä aikaa.
+                        )
+                    ).toFixed(3)} ylimääräistä aikaa.
                     <span
                         class="cursor-help"
                         title="Oletuksella, että teet kokonaisen työpäivän tällä osastolla."
