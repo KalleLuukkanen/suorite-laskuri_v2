@@ -109,7 +109,7 @@
     </form>
 {:else}
     <div class="flex">
-        <button class="btn border-1" onclick={toggle}
+        <button class="btn border-1 text-2xl" onclick={toggle}
             >Lisää tästä uusi suoritus ➕</button
         >
     </div>

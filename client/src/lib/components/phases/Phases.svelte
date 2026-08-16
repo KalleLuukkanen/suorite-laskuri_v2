@@ -3,6 +3,7 @@
     import Phase from "./Phase.svelte";
     import PerformanceForm from "../performances/PerformanceForm.svelte";
     import { usePerformanceState } from "$lib/states/performanceState.svelte.js";
+    const { open_phase } = $props();
 
     let performanceState = usePerformanceState();
     let phases = $derived(performanceState.phases);
@@ -16,6 +17,8 @@
                 <Phase
                     phase_start={phase.phase_start}
                     phase_end={phase.phase_end}
+                    showing={open_phase ===
+                        phase.phase_start.toISOString().slice(0, 10)}
                 />
             </li>
         {/each}

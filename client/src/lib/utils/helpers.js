@@ -40,6 +40,14 @@ export const effInHours = (eff) => {
     return (Number(eff) / 100) * 7.25;
 };
 
+export const effDifference = (performances_1, performances_2) => {
+    const eff1 = calcEfficiency(performances_1);
+    const eff2 = calcEfficiency(performances_2);
+    const diff = (Number(eff1) - Number(eff2)).toFixed(1);
+    const percentage = (eff2 > 0 ? (diff / eff2) * 100 : 0.0).toFixed(2);
+    return { diff, percentage };
+};
+
 export const phaseFromDate = (date) => {
     const d = new Date(date);
     const phase_start = d.getDate() <= 15 ? new Date(d.getFullYear(), d.getMonth(), 1) : new Date(d.getFullYear(), d.getMonth(), 16);
