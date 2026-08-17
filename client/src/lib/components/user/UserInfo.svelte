@@ -7,7 +7,17 @@
     let sectionState = useSectionState();
     let performanceState = usePerformanceState();
 
+    const deleteAcc = async () => {
+        if (!confirm("Haluatko varmasti poistaa tämän tilin?")) {
+            return;
+        }
+        await deleteAccount();
+    };
+
     const deleteInfo = async () => {
+        if (!confirm("Haluatko varmasti poistaa kaikki tiedot?")) {
+            return;
+        }
         await performanceState.removeAll();
         await sectionState.removeAll();
     };
@@ -17,8 +27,7 @@
     <Sections />
     <div class="space-y-4">
         <p class="text-2xl font-bold">Asetukset:</p>
-        <button class="btn border-1" onclick={deleteAccount}>Poista tili</button
-        >
+        <button class="btn border-1" onclick={deleteAcc}>Poista tili</button>
         <button class="btn border-1" onclick={deleteInfo}
             >Poista kaikki tiedot <span
                 class="cursor-help"
