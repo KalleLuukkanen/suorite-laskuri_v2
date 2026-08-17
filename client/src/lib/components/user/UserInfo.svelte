@@ -13,7 +13,6 @@
         }
         await deleteAccount();
     };
-
     const deleteInfo = async () => {
         if (!confirm("Haluatko varmasti poistaa kaikki tiedot?")) {
             return;
