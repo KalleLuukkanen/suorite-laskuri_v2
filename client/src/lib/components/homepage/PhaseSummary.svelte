@@ -79,7 +79,9 @@
                                 <p class="text-lg">
                                     {section.name}:
                                 </p>
-                                <div class="ml-10">
+                                <div
+                                    class="ml-10 border-2 border-gray-300 rounded p-2"
+                                >
                                     {#if eff_difference_previous(section.id).diff > 0}
                                         <p class="text-green-500 text-lg">
                                             + {eff_difference_previous(
@@ -117,11 +119,12 @@
                 </div>
                 <div>
                     <p class="text-xl">
-                        Vrt. kaikkiin: {#if !current}
-                            <span
-                                class="cursor-help"
-                                title="Ml. myös seuraava jakso.">ⓘ</span
-                            >{/if}
+                        Vrt. kaikkiin:
+                        <span
+                            class="cursor-help"
+                            title={`Ml. myös nykyinen ${!current ? "ja seuraava" : ""} jakso.`}
+                            >ⓘ</span
+                        >
                     </p>
                     <ul class="ml-2">
                         {#each sectionState?.sections as section}
@@ -129,7 +132,9 @@
                                 <p class="text-lg">
                                     {section.name}:
                                 </p>
-                                <div class="ml-10">
+                                <div
+                                    class="ml-10 border-2 border-gray-300 rounded p-2"
+                                >
                                     {#if eff_difference_all(section.id).diff > 0}
                                         <p class="text-green-500 text-lg">
                                             + {eff_difference_all(section.id)

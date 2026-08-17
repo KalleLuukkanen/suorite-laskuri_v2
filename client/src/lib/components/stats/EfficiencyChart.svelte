@@ -2,6 +2,7 @@
     import { getEfficiencyByPhaseAndSection } from "$lib/apis/performancesApi.js";
     import { useSectionState } from "$lib/states/sectionState.svelte.js";
     import Loading from "../layout/Loading.svelte";
+    import annotationPlugin from "chartjs-plugin-annotation";
     import {
         Chart,
         BarController,
@@ -19,6 +20,7 @@
         LinearScale,
         Tooltip,
         Legend,
+        annotationPlugin,
     );
     const colors = ["#3b82f6", "#22c55e", "#ef4444", "#eab308", "#a855f7"];
 
@@ -57,7 +59,9 @@
         if (!canvas || !efficiencies) return;
 
         const datasets = section_ids.map((section_id, index) => ({
-            label: sectionState.getOne(section_id)?.name ?? "Tuntematon",
+            label:
+                `${sectionState.getOne(section_id)?.name} (tavoite ${sectionState.getOne(section_id).goal} %)` ??
+                "Tuntematon",
 
             data: phase_starts.map((phase) => {
                 const entry = efficiencies.find(
@@ -70,6 +74,24 @@
 
             backgroundColor: colors[index % colors.length],
         }));
+
+        const goalAnnotations = Object.fromEntries(
+            sectionState.sections.map((section) => [
+                `goal-${section.id}`,
+                {
+                    type: "line",
+                    yMin: section.goal,
+                    yMax: section.goal,
+                    borderWidth: 1,
+                    borderDash: [4, 4],
+                    label: {
+                        display: true,
+                        content: `${section.goal} %`,
+                        position: "end",
+                    },
+                },
+            ]),
+        );
 
         const chart = new Chart(canvas, {
             type: "bar",
@@ -93,8 +115,27 @@
                 },
                 datasets: {
                     bar: {
-                        barPercentage: 0.5,
+                        barPercentage: 0.2,
                         categoryPercentage: 0.7,
+                    },
+                },
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            baseline: {
+                                type: "line",
+                                yMin: 100,
+                                yMax: 100,
+                                borderWidth: 2,
+                                borderDash: [6, 6],
+                                label: {
+                                    display: true,
+                                    content: "100 %",
+                                    position: "end",
+                                },
+                            },
+                            ...goalAnnotations,
+                        },
                     },
                 },
             },
